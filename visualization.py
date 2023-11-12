@@ -1,6 +1,3 @@
-!pip install openpyxl
-
-
 # Import library
 import pandas as pd
 import numpy as np
