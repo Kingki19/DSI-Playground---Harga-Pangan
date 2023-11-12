@@ -11,7 +11,7 @@ def get_df_from_url(url):
         return(df)
 
 # Read dataframe
-data_harga = get_df_from_url("https://github.com/Kingki19/DSI-Playground---Harga-Pangan/blob/6a51e3e0d3347a972fa09bb38b9d0118570e74ec/data_harga.xlsx")
+data_harga = pd.read_excel('data_harga.xlsx')
 
 # Tes
 st.title("Visualization data and prediction for \'DSI-Playground Harga Pangan\' Competition")
