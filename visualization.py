@@ -16,7 +16,7 @@ dar_summary_df = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI
 bp_summary_df = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/bp_summary_pred.csv')
 
 # Tes
-st.title("Visualization data and prediction for \'DSI-Playground Harga Pangan\' Competition")
+st.header("Visualization data and prediction for \'DSI-Playground Harga Pangan\' Competition")
 
 # Using "with" notation
 with st.sidebar:
@@ -24,3 +24,18 @@ with st.sidebar:
         "Choose a shipping method",
         ("Standard (5-15 days)", "Express (2-5 days)")
     )
+
+# Column
+col1, col2, col3 = st.columns(3)
+
+with col1:
+   st.header("A cat")
+   st.image("https://static.streamlit.io/examples/cat.jpg")
+
+with col2:
+   st.header("A dog")
+   st.image("https://static.streamlit.io/examples/dog.jpg")
+
+with col3:
+   st.header("An owl")
+   st.image("https://static.streamlit.io/examples/owl.jpg")
