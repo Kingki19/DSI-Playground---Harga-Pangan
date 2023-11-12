@@ -5,19 +5,13 @@ import streamlit as st
 import requests
 
 # Funct to get data from url
-def get_data(url):
-    req = requests.get(url)
-    if req.status_code == requests.codes.ok:
-        req = req.json()  # the response is a JSON
-        # req is now a dict with keys: name, encoding, url, size ...
-        # and content. But it is encoded with base64.
-        content = base64.decodestring(req['content'])
-        return(content)
-    else:
-        print('Content was not found.')
+def get_df_from_url(url):
+        myfile = requests.get(url)
+        df=pd.read_excel(myfile.content)
+        return(df)
 
 # Read dataframe
-data_harga = get_data("https://api.github.com/Kingki19/DSI-Playground---Harga-Pangan/raw/main/data_harga.xlsx")
+data_harga = get_df_from_url("https://github.com/Kingki19/DSI-Playground---Harga-Pangan/blob/6a51e3e0d3347a972fa09bb38b9d0118570e74ec/data_harga.xlsx")
 
 # Tes
 st.title("Visualization data and prediction for \'DSI-Playground Harga Pangan\' Competition")
