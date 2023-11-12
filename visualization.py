@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
-import request
+import requests
 
 # Read dataframe
 url = "https://github.com/Kingki19/DSI-Playground---Harga-Pangan/raw/main/data_harga.xlsx"
