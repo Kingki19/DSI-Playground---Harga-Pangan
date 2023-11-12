@@ -9,12 +9,11 @@ import requests
 
 # Funct to get data from url
 def get_df_from_url(url):
-        myfile = requests.get(url)
-        df=pd.read_excel(myfile.content)
+        df = pd.read_excel(url)
         return(df)
 
 # Read dataframe
-data_harga = pd.read_excel('data_harga.xlsx')
+data_harga = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/blob/main/data_harga.xlsx')
 
 # Tes
 st.title("Visualization data and prediction for \'DSI-Playground Harga Pangan\' Competition")
