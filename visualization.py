@@ -6,7 +6,7 @@ import requests
 
 # Funct to get data from url
 def get_df_from_url(url):
-        df = pd.read_csv(url)
+        df = pd.read_csv(url, index_col=0)
         return(df)
 
 # Read dataframe
