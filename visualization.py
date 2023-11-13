@@ -27,6 +27,4 @@ with st.sidebar:
         ("Bawang Merah", "Daging Ayam Ras", "Beras Premium")
     )
 
-st.dataframe(bm_gabungan)
-st.dataframe(dar_gabungan)
-st.dataframe(bp_gabungan)
+st.dataframe(data_radio)
