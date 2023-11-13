@@ -24,7 +24,7 @@ with st.sidebar:
     st.divider()
     data_radio = st.radio(
         "Choose a data to visualize:",
-        ("Bawang Merah", "Daging Ayam Ras", "Beras Premium")
+        ("Bawang merah / Shallots", "Daging ayam ras / Purebred chicken meat", "Beras premium / Premium rice")
     )
     st.divider()
     province_selectbox = st.selectbox(
@@ -39,10 +39,11 @@ with st.sidebar:
     
 column = province_selectbox
 st.header(column)
-if data_radio == "Bawang Merah": 
+st.divider()
+if data_radio == "Bawang merah / Shallots": 
     st.dataframe(bm_gabungan)
-elif data_radio == "Daging Ayam Ras":
+elif data_radio == "Daging ayam ras / Purebred chicken meat":
     st.dataframe(dar_gabungan)
-elif data_radio == "Beras Premium":
+elif data_radio == "Beras premium / Premium rice":
     st.dataframe(bp_gabungan)
 
