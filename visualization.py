@@ -26,7 +26,16 @@ with st.sidebar:
         "Choose a data to visualize:",
         ("Bawang Merah", "Daging Ayam Ras", "Beras Premium")
     )
-
+    provinsi_selectbox = st.selectbox(
+        "Choose a province to visualize:"
+        ('Aceh', 'Sumatera Utara', 'Sumatera Barat', 'Riau', 'Jambi', 'Sumatera Selatan', 'Bengkulu', 'Lampung',
+                'Bangka Belitung', 'Kepulauan Riau', 'DKI Jakarta', 'Jawa Barat', 'Jawa Tengah', 'D.I. Yogyakarta',
+                'Jawa Timur', 'Banten', 'Bali', 'Nusa Tenggara Barat', 'Nusa Tenggara Timur', 'Kalimantan Barat',
+                'Kalimantan Tengah', 'Kalimantan Selatan', 'Kalimantan Timur', 'Kalimantan Utara', 'Sulawesi Utara',
+                'Sulawesi Tengah', 'Sulawesi Selatan', 'Sulawesi Tenggara', 'Gorontalo', 'Sulawesi Barat', 'Maluku',
+                'Maluku Utara', 'Papua Barat', 'Papua')
+    )
+    
 if data_radio == "Bawang Merah": 
     st.dataframe(bm_gabungan)
 elif data_radio == "Daging Ayam Ras":
