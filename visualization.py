@@ -17,16 +17,12 @@ dar_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-P
 bp_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_bp_gabungan.csv')
 
 # === VISUALIZATION USING STREAMLIT ===
+# Config for page
 st.set_page_config(
-    page_title="Ex-stream-ly Cool App",
-    page_icon="🧊",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        'Get Help': 'https://www.extremelycoolapp.com/help',
-        'Report a bug': "https://www.extremelycoolapp.com/bug",
-        'About': "# This is a header. This is an *extremely* cool app!"
-    }
+    page_title="DSI Playground - Harga Pangan",
+    page_icon="🌾",
+    layout="centered",
+    initial_sidebar_state="auto",
 )
 
 # Using "with" notation
