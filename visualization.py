@@ -27,7 +27,7 @@ with st.sidebar:
         ("Bawang Merah", "Daging Ayam Ras", "Beras Premium")
     )
     provinsi_selectbox = st.selectbox(
-        "Choose a province to visualize:"
+        "Choose a province to visualize:",
         ('Aceh', 'Sumatera Utara', 'Sumatera Barat', 'Riau', 'Jambi', 'Sumatera Selatan', 'Bengkulu', 'Lampung',
                 'Bangka Belitung', 'Kepulauan Riau', 'DKI Jakarta', 'Jawa Barat', 'Jawa Tengah', 'D.I. Yogyakarta',
                 'Jawa Timur', 'Banten', 'Bali', 'Nusa Tenggara Barat', 'Nusa Tenggara Timur', 'Kalimantan Barat',
