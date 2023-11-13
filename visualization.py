@@ -54,16 +54,19 @@ class Dashboard:
 column_name = province_selectbox
 st.header(column_name)
 st.divider()
+
 if data_radio == "Bawang merah / Shallots":
-    bm_dashboard = Dashboard(bm_gabungan, data_radio)
+    bm_dashboard = Dashboard(bm_gabungan, column_name)
     st.line_chart(bm_dashboard.col_data)
+    
 elif data_radio == "Daging ayam ras / Purebred chicken meat":
-    dar_dashboard = Dashboard(dar_gabungan, data_radio)
+    dar_dashboard = Dashboard(dar_gabungan, column_name)
     st.line_chart(dar_dashboard.col_data)
+    
 elif data_radio == "Beras premium / Premium rice":
     if column_name == 'Gorontalo':
         st.error("There's no Gorontalo in this dataframe")
     else:
-        bp_dashboard = Dashboard(bp_gabungan, data_radio)
+        bp_dashboard = Dashboard(bp_gabungan, column_name)
         st.line_chart(bp_dashboard.col_data)
 
