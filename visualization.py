@@ -43,20 +43,27 @@ with st.sidebar:
                 'Sulawesi Tengah', 'Sulawesi Selatan', 'Sulawesi Tenggara', 'Gorontalo', 'Sulawesi Barat', 'Maluku',
                 'Maluku Utara', 'Papua Barat', 'Papua')
     )
+    
+# Create a 'Dashboard' object
+class Dashboard:
+    def __init__(self, df, col_name):
+        self.df = df
+        self.col_name = col_name
+        self.col_data = df[col_name]
 
-# class dashboard:
-#     def __init__(self):
-        
-column = province_selectbox
-st.header(column)
+column_name = province_selectbox
+st.header(column_name)
 st.divider()
-if data_radio == "Bawang merah / Shallots": 
-    st.dataframe(bm_gabungan)
+if data_radio == "Bawang merah / Shallots":
+    bm_dashboard = Dashboard(bm_gabungan, data_radio)
+    st.line_chart(bm_dashboard.col_data)
 elif data_radio == "Daging ayam ras / Purebred chicken meat":
-    st.dataframe(dar_gabungan)
+    dar_dashboard = Dashboard(dar_gabungan, data_radio)
+    st.line_chart(dar_dashboard.col_data)
 elif data_radio == "Beras premium / Premium rice":
-    if column == 'Gorontalo':
+    if column_name == 'Gorontalo':
         st.error("There's no Gorontalo in this dataframe")
     else:
-        st.dataframe(bp_gabungan)
+        bp_dashboard = Dashboard(bp_gabungan, data_radio)
+        st.line_chart(bp_dashboard.col_data)
 
