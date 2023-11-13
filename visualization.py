@@ -20,14 +20,13 @@ bp_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Pl
 
 # Using "with" notation
 with st.sidebar:
-    st.title("Visualization data and prediction for")
-    st.title("\'DSI Playground-Harga Pangan\'")
-    st.title("Competition")
+    st.title("Visualization data and prediction for \'DSI Playground-Harga Pangan\' Competition")
     st.divider()
     data_radio = st.radio(
         "Choose a data to visualize:",
         ("Bawang Merah", "Daging Ayam Ras", "Beras Premium")
     )
+    st.divider()
     provinsi_selectbox = st.selectbox(
         "Choose a province to visualize:",
         ('Aceh', 'Sumatera Utara', 'Sumatera Barat', 'Riau', 'Jambi', 'Sumatera Selatan', 'Bengkulu', 'Lampung',
