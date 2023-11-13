@@ -36,7 +36,10 @@ with st.sidebar:
                 'Sulawesi Tengah', 'Sulawesi Selatan', 'Sulawesi Tenggara', 'Gorontalo', 'Sulawesi Barat', 'Maluku',
                 'Maluku Utara', 'Papua Barat', 'Papua')
     )
-    
+
+# class dashboard:
+#     def __init__(self):
+        
 column = province_selectbox
 st.header(column)
 st.divider()
@@ -45,5 +48,8 @@ if data_radio == "Bawang merah / Shallots":
 elif data_radio == "Daging ayam ras / Purebred chicken meat":
     st.dataframe(dar_gabungan)
 elif data_radio == "Beras premium / Premium rice":
-    st.dataframe(bp_gabungan)
+    if column == 'Gorontalo':
+        st.error("There's no Gorontalo in this dataframe")
+    else:
+        st.dataframe(bp_gabungan)
 
