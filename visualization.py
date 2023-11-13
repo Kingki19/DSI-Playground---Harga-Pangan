@@ -12,9 +12,9 @@ def get_df_from_url(url):
     return df
 
 # Read dataframe from csv file
-bm_gabungan = get_df_from_url(https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_bm_gabungan.csv)
-dar_gabungan = get_df_from_url(https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_dar_gabungan.csv)
-bp_gabungan = get_df_from_url(https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_bp_gabungan.csv)
+bm_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_bm_gabungan.csv')
+dar_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_dar_gabungan.csv')
+bp_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_bp_gabungan.csv')
 
 # === VISUALIZATION USING STREAMLIT ===
 st.header("Visualization data and prediction for 'DSI-Playground Harga Pangan' Competition")
