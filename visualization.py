@@ -18,7 +18,6 @@ bp_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Pl
 
 # === VISUALIZATION USING STREAMLIT ===
 
-
 # Using "with" notation
 with st.sidebar:
     st.header("Visualization data and prediction for 'DSI-Playground Harga Pangan' Competition")
@@ -27,4 +26,10 @@ with st.sidebar:
         ("Bawang Merah", "Daging Ayam Ras", "Beras Premium")
     )
 
-st.dataframe(data_radio)
+if data_radio == "Bawang Merah": 
+    st.dataframe(bm_gabungan)
+elif data_radio == "Daging Ayam Ras":
+    st.dataframe(dar_gabungan)
+elif data_radio == "Beras Premium":
+    st.dataframe(bp_gabungan)
+
