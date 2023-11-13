@@ -17,14 +17,14 @@ dar_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-P
 bp_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_bp_gabungan.csv')
 
 # === VISUALIZATION USING STREAMLIT ===
-st.header("Visualization data and prediction for 'DSI-Playground Harga Pangan' Competition")
+
 
 # Using "with" notation
 with st.sidebar:
-    st.title("Option:")
-    add_radio = st.radio(
-        "Choose a shipping method",
-        ("Standard (5-15 days)", "Express (2-5 days)")
+    st.header("Visualization data and prediction for 'DSI-Playground Harga Pangan' Competition")
+    data_radio = st.radio(
+        "Choose a data to visualize:",
+        ("Bawang Merah", "Daging Ayam Ras", "Beras Premium")
     )
 
 st.dataframe(bm_gabungan)
