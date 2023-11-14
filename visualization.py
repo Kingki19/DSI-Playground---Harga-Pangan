@@ -35,8 +35,9 @@ with st.sidebar:
     )
     st.divider()
     st.markdown("If you are interested, connect with me via:")
-    st.markdown("![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white): [Muhammad Rizqi](www.linkedin.com/in/muhammad-rizqi-921538248)")
-
+    st.markdown("[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](www.linkedin.com/in/muhammad-rizqi-921538248)")
+    st.markdown("[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Kingki19)")
+    st.markdown("[![Kaggle](https://img.shields.io/badge/Kaggle-035a7d?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/kingki19)")
     
 # Create a 'Dashboard' object
 class Dashboard:
