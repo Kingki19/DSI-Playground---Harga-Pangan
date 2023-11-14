@@ -36,15 +36,7 @@ with st.sidebar:
     st.divider()
     st.markdown("If you are interested, connect with me via:")
     st.markdown("**Linkedin**: [Muhammad Rizqi](www.linkedin.com/in/muhammad-rizqi-921538248)")
-    # province_selectbox = st.selectbox(
-    #     "Choose a province to visualize:",
-    #     ('Aceh', 'Sumatera Utara', 'Sumatera Barat', 'Riau', 'Jambi', 'Sumatera Selatan', 'Bengkulu', 'Lampung',
-    #             'Bangka Belitung', 'Kepulauan Riau', 'DKI Jakarta', 'Jawa Barat', 'Jawa Tengah', 'D.I. Yogyakarta',
-    #             'Jawa Timur', 'Banten', 'Bali', 'Nusa Tenggara Barat', 'Nusa Tenggara Timur', 'Kalimantan Barat',
-    #             'Kalimantan Tengah', 'Kalimantan Selatan', 'Kalimantan Timur', 'Kalimantan Utara', 'Sulawesi Utara',
-    #             'Sulawesi Tengah', 'Sulawesi Selatan', 'Sulawesi Tenggara', 'Gorontalo', 'Sulawesi Barat', 'Maluku',
-    #             'Maluku Utara', 'Papua Barat', 'Papua')
-    # )
+
     
 # Create a 'Dashboard' object
 class Dashboard:
@@ -52,7 +44,16 @@ class Dashboard:
         self.df = df
         self.col_name = col_name
         self.col_data = df[col_name]
-
+        
+province_selectbox = st.selectbox(
+    "Choose a province to visualize:",
+    ('Aceh', 'Sumatera Utara', 'Sumatera Barat', 'Riau', 'Jambi', 'Sumatera Selatan', 'Bengkulu', 'Lampung',
+            'Bangka Belitung', 'Kepulauan Riau', 'DKI Jakarta', 'Jawa Barat', 'Jawa Tengah', 'D.I. Yogyakarta',
+            'Jawa Timur', 'Banten', 'Bali', 'Nusa Tenggara Barat', 'Nusa Tenggara Timur', 'Kalimantan Barat',
+            'Kalimantan Tengah', 'Kalimantan Selatan', 'Kalimantan Timur', 'Kalimantan Utara', 'Sulawesi Utara',
+            'Sulawesi Tengah', 'Sulawesi Selatan', 'Sulawesi Tenggara', 'Gorontalo', 'Sulawesi Barat', 'Maluku',
+            'Maluku Utara', 'Papua Barat', 'Papua')
+)
 column_name = province_selectbox
 st.header(column_name)
 st.divider()
