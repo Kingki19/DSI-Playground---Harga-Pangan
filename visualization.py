@@ -35,7 +35,7 @@ with st.sidebar:
     )
     st.divider()
     st.markdown("If you are interested, connect with me via:")
-    st.markdown("**Linkedin**: [Muhammad Rizqi](www.linkedin.com/in/muhammad-rizqi-921538248)")
+    st.markdown("![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white): [Muhammad Rizqi](www.linkedin.com/in/muhammad-rizqi-921538248)")
 
     
 # Create a 'Dashboard' object
