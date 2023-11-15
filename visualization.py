@@ -51,7 +51,7 @@ class Container:
         mean = self.col_data.mean()
         max = self.col_data.max()
         
-        min_col, mean_col, max_col = st.column(3)
+        min_col, mean_col, max_col = st.columns(3)
         min_col.metric("Minimum price", min)
         mean_col.metric("Mean price", mean)
         max_col.metric("Maximum price", max)
