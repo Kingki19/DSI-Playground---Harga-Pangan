@@ -38,13 +38,33 @@ with st.sidebar:
     st.markdown("[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](www.linkedin.com/in/muhammad-rizqi-921538248)")
     st.markdown("[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Kingki19)")
     st.markdown("[![Kaggle](https://img.shields.io/badge/Kaggle-035a7d?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/kingki19)")
-    
-# Create a 'Dashboard' object
-class Dashboard:
+
+# Create a 'Container' that contain one or multiple element
+class Container:
     def __init__(self, df, col_name):
         self.df = df
         self.col_name = col_name
         self.col_data = df[col_name]
+    # Create metrics that include
+    def add_metrics(self):
+        min = self.col_data.min()
+        mean = self.col_data.mean()
+        max = self.col_data.max()
+        
+        min_col, mean_col, max_col = st.column(3)
+        min_col.metric("Minimum price", min)
+        mean_col.metric("Mean price", mean)
+        max_col.metric("Maximum price", max)
+    # Create line chart into container
+    def add_line_chart(self):
+        st.line_chart(self.col_data)
+# Create a 'Dashboard' object that contain one or multiple 'Container' objects
+# class Dashboard:
+#     def __init__(self, df, col_name):
+#         self.df = df
+#         self.col_name = col_name
+#         self.col_data = df[col_name]
+#     def add_container(self, container):
         
 province_selectbox = st.selectbox(
     "Choose a province to visualize:",
@@ -60,17 +80,21 @@ st.header(column_name)
 st.divider()
 
 if data_radio == "Bawang merah / Shallots":
-    bm_dashboard = Dashboard(bm_gabungan, column_name)
-    st.line_chart(bm_dashboard.col_data)
-    
+    # bm_dashboard = Dashboard(bm_gabungan, column_name)
+    # st.line_chart(bm_dashboard.col_data)
+    container_1 = Container(bm_gabungan, column_name)
+    container_1.add_metrics()
 elif data_radio == "Daging ayam ras / Purebred chicken meat":
-    dar_dashboard = Dashboard(dar_gabungan, column_name)
-    st.line_chart(dar_dashboard.col_data)
-    
+    # dar_dashboard = Dashboard(dar_gabungan, column_name)
+    # st.line_chart(dar_dashboard.col_data)
+    container_1 = Container(dar_gabungan, column_name)
+    container_1.add_metrics()
 elif data_radio == "Beras premium / Premium rice":
     if column_name == 'Gorontalo':
         st.error("There's no Gorontalo in this dataframe")
     else:
-        bp_dashboard = Dashboard(bp_gabungan, column_name)
-        st.line_chart(bp_dashboard.col_data)
+        # bp_dashboard = Dashboard(bp_gabungan, column_name)
+        # st.line_chart(bp_dashboard.col_data)
+        container_1 = Container(bp_gabungan, column_name)
+        container_1.add_metrics()
 
