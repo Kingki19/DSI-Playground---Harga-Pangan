@@ -47,9 +47,9 @@ class Container:
         self.col_data = df[col_name]
     # Create metrics that include
     def add_metrics(self):
-        min = self.col_data.min()
-        mean = self.col_data.mean()
-        max = self.col_data.max()
+        min = round(self.col_data.min())
+        mean = round(self.col_data.mean())
+        max = round(self.col_data.max())
         
         min_col, mean_col, max_col = st.columns(3)
         min_col.metric("Minimum price", min)
