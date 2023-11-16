@@ -36,28 +36,48 @@ provinces = [
 # Create a 'Container' that contain one or multiple element
 class Container:
     def __init__(self, df_combined, provinces):
-        self.df_combined = df_combined
-        self.provinces = provinces
+        self.df_combined = df_combined # it's dictionary 
+        self.provinces = provinces # list
         self.selected_df = None # Choose between value in 'df_combined'
-        self.df = None # df = df_combined[selected_df]
-        self.col_name = None # col_name = province 
-        self.col_data = None # col_data = df[col_name]
+        self.df = None # self.df = self.df_combined[selected_df]
+        self.selected_province = None # province that want to display 
+        self.province_data = {} # province_data = {'province_name1': province_data1, ...}
         
-    # Add options for user to choose one or multiple provinces 
-    def choose_provinces(self):
+    # Add options for user to choose one or multiple provinces and which data to visualize
+    def options(self):
+        data_option, provinces_option = st.columns(2)
+        data_option = st.selectbox(
+            "Select the data you want to visualize:",
+            ('bawang_merah', 'daging_ayam_ras', 'beras_premium')
+        )
+        provinces_option = st.multiselect(
+            "Select which provinces you want to display:",
+            self.provinces,
+            ['Aceh']
+        )
+        self.selected_df = data_option # return string type
+        self.df = self.df_combined[self.selected_df]
+        self.selected_province = provinces_option # return list type
+        self.province_data = {province : self.df[province] for province in self.selected_province} 
         
     # Create metrics that include
     def add_metrics(self):
-        min = round(self.col_data.min())
-        mean = round(self.col_data.mean())
-        max = round(self.col_data.max())
-        min_col, mean_col, max_col = st.columns(3)
-        min_col.metric("Minimum price", min)
-        mean_col.metric("Mean price", mean)
-        max_col.metric("Maximum price", max)
+        if len(self.selected_province) == 0:
+            st.info("You didn't choose a single province!")
+        elif len(self.selected_province) > 0:
+            min = round(self.province_data.min().min())
+            mean = round(self.province_data.mean().mean())
+            max = round(self.province_data.max().max())
+            min_col, mean_col, max_col = st.columns(3)
+            min_col.metric("Minimum price", f"Rp {min}")
+            mean_col.metric("Mean price", f"Rp {mean}")
+            max_col.metric("Maximum price", f"Rp {max}")
+        else:
+            st.error("It can't be possible!")
+        
     # Create line chart into container
     def add_line_chart(self):
-        st.line_chart(self.col_data)
+        st.line_chart(self.province_data)
         
 
 # === VISUALIZATION USING STREAMLIT ===
