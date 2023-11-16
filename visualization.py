@@ -4,7 +4,7 @@ import numpy as np
 import streamlit as st
 import requests
 
-# === Preparing data for visualization 
+# === Preparing data for visualization ===
 
 # Function to get csv dataframe from url
 def get_df_from_url(url):
@@ -15,6 +15,36 @@ def get_df_from_url(url):
 bm_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_bm_gabungan.csv')
 dar_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_dar_gabungan.csv')
 bp_gabungan = get_df_from_url('https://raw.githubusercontent.com/Kingki19/DSI-Playground---Harga-Pangan/main/df_bp_gabungan.csv')
+
+# === Create objects to visualize ===
+# Create a 'Container' that contain one or multiple element
+class Container:
+    def __init__(self, df, col_name):
+        self.df = df
+        self.col_name = col_name
+        self.col_data = df[col_name]
+    # Create metrics that include
+    def add_metrics(self):
+        min = round(self.col_data.min())
+        mean = round(self.col_data.mean())
+        max = round(self.col_data.max())
+        min_col, mean_col, max_col = st.columns(3)
+        min_col.metric("Minimum price", min)
+        mean_col.metric("Mean price", mean)
+        max_col.metric("Maximum price", max)
+    # Create line chart into container
+    def add_line_chart(self):
+        st.line_chart(self.col_data)
+        
+# Create a 'Dashboard' object that contain one or multiple 'Container' objects
+class Dashboard:
+    def __init__(self):
+        self.container_dict = {}
+    def add_container(self, key_container, val_container):
+        self.container_dict[key_container] = val_container
+    def display_container(self):
+        for key, value in self.container_dict.items():
+            value
 
 # === VISUALIZATION USING STREAMLIT ===
 # Config for page
@@ -30,7 +60,7 @@ with st.sidebar:
     st.title("Visualization data and prediction for \'DSI Playground-Harga Pangan\' Competition")
     st.divider()
     data_radio = st.radio(
-        "Choose a data to visualize:",
+        "Choose a data to visualize:", 
         ("Bawang merah / Shallots", "Daging ayam ras / Purebred chicken meat", "Beras premium / Premium rice")
     )
     st.divider()
@@ -39,33 +69,7 @@ with st.sidebar:
     st.markdown("[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Kingki19)")
     st.markdown("[![Kaggle](https://img.shields.io/badge/Kaggle-035a7d?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/kingki19)")
 
-# Create a 'Container' that contain one or multiple element
-class Container:
-    def __init__(self, df, col_name):
-        self.df = df
-        self.col_name = col_name
-        self.col_data = df[col_name]
-    # Create metrics that include
-    def add_metrics(self):
-        min = round(self.col_data.min())
-        mean = round(self.col_data.mean())
-        max = round(self.col_data.max())
-        
-        min_col, mean_col, max_col = st.columns(3)
-        min_col.metric("Minimum price", min)
-        mean_col.metric("Mean price", mean)
-        max_col.metric("Maximum price", max)
-    # Create line chart into container
-    def add_line_chart(self):
-        st.line_chart(self.col_data)
-# Create a 'Dashboard' object that contain one or multiple 'Container' objects
-# class Dashboard:
-#     def __init__(self, df, col_name):
-#         self.df = df
-#         self.col_name = col_name
-#         self.col_data = df[col_name]
-#     def add_container(self, container):
-        
+
 province_selectbox = st.selectbox(
     "Choose a province to visualize:",
     ('Aceh', 'Sumatera Utara', 'Sumatera Barat', 'Riau', 'Jambi', 'Sumatera Selatan', 'Bengkulu', 'Lampung',
@@ -84,11 +88,19 @@ if data_radio == "Bawang merah / Shallots":
     # st.line_chart(bm_dashboard.col_data)
     container_1 = Container(bm_gabungan, column_name)
     container_1.add_metrics()
+    container_1 = container_1.add_line_chart()
+    dar_dashboard = Dashboard()
+    dar_dashboard = dar_dashboard.add_container('1', container_1)
+    dar_dashboard.display()
 elif data_radio == "Daging ayam ras / Purebred chicken meat":
     # dar_dashboard = Dashboard(dar_gabungan, column_name)
     # st.line_chart(dar_dashboard.col_data)
     container_1 = Container(dar_gabungan, column_name)
-    container_1.add_metrics()
+    container_1 = container_1.add_metrics()
+    container_1 = container_1.add_line_chart()
+    dar_dashboard = Dashboard()
+    dar_dashboard = dar_dashboard.add_container('1', container_1)
+    dar_dashboard.display()
 elif data_radio == "Beras premium / Premium rice":
     if column_name == 'Gorontalo':
         st.error("There's no Gorontalo in this dataframe")
@@ -97,4 +109,8 @@ elif data_radio == "Beras premium / Premium rice":
         # st.line_chart(bp_dashboard.col_data)
         container_1 = Container(bp_gabungan, column_name)
         container_1.add_metrics()
+        container_1 = container_1.add_line_chart()
+        dar_dashboard = Dashboard()
+        dar_dashboard = dar_dashboard.add_container('1', container_1)
+        dar_dashboard.display()
 
