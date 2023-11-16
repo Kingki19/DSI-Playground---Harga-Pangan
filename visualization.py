@@ -97,7 +97,6 @@ with st.sidebar:
     #     "Choose a data to visualize:", 
     #     ("Bawang merah / Shallots", "Daging ayam ras / Purebred chicken meat", "Beras premium / Premium rice")
     st.markdown("**Better to use Computer or Laptop when using this app!**")
-    )
     st.divider()
     st.markdown("If you are interested, connect with me via:")
     st.markdown("[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](www.linkedin.com/in/muhammad-rizqi-921538248)")
