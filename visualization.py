@@ -66,7 +66,6 @@ class Container:
         else:
             self.selected_df = data_option # return string type
             self.df = self.df_combined[self.selected_df]
-            self.df.index = pd.to_datetime(self.df.index) # just to make sure the index was a datetime
             index_list = self.df.index.to_list()
         # Slider options for datetime range
             with self.container:
