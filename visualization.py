@@ -34,6 +34,7 @@ provinces = [
 
 # === Create objects to visualize ===
 # Create a 'Container' that contain one or multiple element
+# 'container' is local variable in 'Container' object to make sure all element in one 'container'
 class Container:
     def __init__(self, df_combined, provinces):
         self.df_combined = df_combined # it's dictionary 
@@ -42,19 +43,21 @@ class Container:
         self.df = None # self.df = self.df_combined[selected_df]
         self.selected_province = None # province that want to display 
         self.province_data = {} # province_data = {'province_name1': province_data1, ...}
+        self.container = st.container
         
     # Add options for user to choose one or multiple provinces and which data to visualize
     def options(self):
-        data_option, provinces_option = st.columns(2)
-        data_option = st.selectbox(
-            "Select the data you want to visualize:",
-            ('bawang_merah', 'daging_ayam_ras', 'beras_premium')
-        )
-        provinces_option = st.multiselect(
-            "Select which provinces you want to display:",
-            self.provinces,
-            ['Aceh']
-        )
+        with self.container:
+            data_option, provinces_option = st.columns(2)
+            data_option = st.selectbox(
+                "Select the data you want to visualize:",
+                ('bawang_merah', 'daging_ayam_ras', 'beras_premium')
+            )
+            provinces_option = st.multiselect(
+                "Select which provinces you want to display:",
+                self.provinces,
+                ['Aceh']
+            )
         self.selected_df = data_option # return string type
         self.df = self.df_combined[self.selected_df]
         self.selected_province = provinces_option # return list type
@@ -68,16 +71,18 @@ class Container:
             min = round(self.province_data.min().min())
             mean = round(self.province_data.mean().mean())
             max = round(self.province_data.max().max())
-            min_col, mean_col, max_col = st.columns(3)
-            min_col.metric("Minimum price", f"Rp {min}")
-            mean_col.metric("Mean price", f"Rp {mean}")
-            max_col.metric("Maximum price", f"Rp {max}")
+            with self.container:
+                min_col, mean_col, max_col = st.columns(3)
+                min_col.metric("Minimum price", f"Rp {min}")
+                mean_col.metric("Mean price", f"Rp {mean}")
+                max_col.metric("Maximum price", f"Rp {max}")
         else:
             st.error("It can't be possible!")
         
     # Create line chart into container
     def add_line_chart(self):
-        st.line_chart(self.province_data)
+        with self.container:
+            st.line_chart(self.province_data)
         
 
 # === VISUALIZATION USING STREAMLIT ===
@@ -93,9 +98,6 @@ st.set_page_config(
 with st.sidebar:
     st.title("Visualization data and prediction for \'DSI Playground-Harga Pangan\' Competition")
     st.divider()
-    # data_radio = st.radio(
-    #     "Choose a data to visualize:", 
-    #     ("Bawang merah / Shallots", "Daging ayam ras / Purebred chicken meat", "Beras premium / Premium rice")
     st.markdown("**Better to use Computer or Laptop when using this app!**")
     st.divider()
     st.markdown("If you are interested, connect with me via:")
@@ -105,31 +107,35 @@ with st.sidebar:
 
 
 # DASHBOARD
-column_name = province_selectbox
-st.header(column_name)
-st.divider()
+# column_name = province_selectbox
+# st.header(column_name)
+# st.divider()
 
-if data_radio == "Bawang merah / Shallots":
-    # bm_dashboard = Dashboard(bm_gabungan, column_name)
-    # st.line_chart(bm_dashboard.col_data)
-    container_1 = Container(bm_gabungan, column_name)
-    container_1.add_metrics()
-    container_1 = container_1.add_line_chart()
+# if data_radio == "Bawang merah / Shallots":
+#     # bm_dashboard = Dashboard(bm_gabungan, column_name)
+#     # st.line_chart(bm_dashboard.col_data)
+#     container_1 = Container(bm_gabungan, column_name)
+#     container_1.add_metrics()
+#     container_1 = container_1.add_line_chart()
     
-elif data_radio == "Daging ayam ras / Purebred chicken meat":
-    # dar_dashboard = Dashboard(dar_gabungan, column_name)
-    # st.line_chart(dar_dashboard.col_data)
-    container_1 = Container(dar_gabungan, column_name)
-    container_1 = container_1.add_metrics()
-    container_1 = container_1.add_line_chart()
+# elif data_radio == "Daging ayam ras / Purebred chicken meat":
+#     # dar_dashboard = Dashboard(dar_gabungan, column_name)
+#     # st.line_chart(dar_dashboard.col_data)
+#     container_1 = Container(dar_gabungan, column_name)
+#     container_1 = container_1.add_metrics()
+#     container_1 = container_1.add_line_chart()
 
-elif data_radio == "Beras premium / Premium rice":
-    if column_name == 'Gorontalo':
-        st.error("There's no Gorontalo in this dataframe")
-    else:
-        # bp_dashboard = Dashboard(bp_gabungan, column_name)
-        # st.line_chart(bp_dashboard.col_data)
-        container_1 = Container(bp_gabungan, column_name)
-        container_1.add_metrics()
-        container_1 = container_1.add_line_chart()
+# elif data_radio == "Beras premium / Premium rice":
+#     if column_name == 'Gorontalo':
+#         st.error("There's no Gorontalo in this dataframe")
+#     else:
+#         # bp_dashboard = Dashboard(bp_gabungan, column_name)
+#         # st.line_chart(bp_dashboard.col_data)
+#         container_1 = Container(bp_gabungan, column_name)
+#         container_1.add_metrics()
+#         container_1 = container_1.add_line_chart()
  
+container1 = Container(df_combined, provinces)
+container1.options()
+container1.add_metrics()
+container1.add_line_chart()
