@@ -64,6 +64,7 @@ class Container:
         else:
             self.selected_df = data_option # return string type
             self.df = self.df_combined[self.selected_df]
+            self.df.index = pd.to_datetime(self.df.index, format='%Y-%m-%d') # just to make sure the index was a datetime
             self.selected_province = provinces_option # return list type
             self.province_data = pd.DataFrame({province : self.df[province] for province in self.selected_province})
             
@@ -95,10 +96,10 @@ class Container:
         with self.container:
             date_range = st.slider(
                 "Choose date range to visualize:",
+                value = (index_start, index_end),
                 min_value = index_start,
                 max_value = index_end, 
-                step = 30, # each month
-                value = (index_start, index_end)
+                step = 30 # each month
             )
         start_range = date_range[0]
         end_range = date_range[1]
