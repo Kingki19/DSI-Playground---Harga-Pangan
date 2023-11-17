@@ -114,7 +114,7 @@ class Container:
                 max_col.metric(
                     label = "Maximum price", 
                     value = f"Rp {max:,}",
-                    delta = f"{max_column} : {max_index}"
+                    delta = f"{max_column} : {max_index}",
                     delta_color = "off",
                     help = f"The highest value in seleced data / provinces"
                 )
