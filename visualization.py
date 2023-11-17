@@ -94,8 +94,8 @@ class Container:
         index_start = self.df.index.min().strftime('%Y-%m-%d')  # Convert to string
         index_end = self.df.index.max().strftime('%Y-%m-%d')    # Convert to string
         # debug
-        print(f"index_start: {index_start}, type: {type(index_start)}")
-        print(f"index_end: {index_end}, type: {type(index_end)}")
+        st.write(f"index_start: {index_start}, type: {type(index_start)}")
+        st.write(f"index_end: {index_end}, type: {type(index_end)}")
         with self.container:
             date_range = st.slider(
                 "Choose date range to visualize:",
@@ -105,7 +105,7 @@ class Container:
                 step=30  # each month
             )
         # debug
-        print(f"date_range: {date_range}, type: {type(date_range)}")
+        st.write(f"date_range: {date_range}, type: {type(date_range)}")
         start_range = pd.to_datetime(date_range[0])
         end_range = pd.to_datetime(date_range[1])
         self.df = self.df.loc[start_range:end_range]
