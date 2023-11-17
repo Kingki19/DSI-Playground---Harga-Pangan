@@ -134,4 +134,9 @@ container1 = Container(df_combined, provinces)
 container1.options()
 container1.add_metrics()
 container1.add_line_chart()
-container1.date_slider()
+# container1.date_slider()
+date_slider = st.slider(
+    "When do you start?",
+    value=(datetime(2020, 1, 1, 9, 30), datetime(2022, 1, 1, 9, 30)),
+    format="MM/DD/YY - hh:mm")
+)
