@@ -87,7 +87,22 @@ class Container:
     def add_line_chart(self):
         with self.container:
             st.line_chart(self.province_data)
-        
+    
+    # Create range slider for visualization
+    def date_slider(self):
+        index_start = self.df.index.min() # first index of datetime
+        index_end = self.df.index.max() # last index of datetime
+        with self.container:
+            date_range = st.slider( # return tuple value of range that used 
+                "Choose date range to visualize:",
+                min_value = index_start,
+                max_value = index_end, 
+                step = 30, # each month
+                value = (index_start, index_end)
+            )
+        start_range = date_range[0]
+        end_range = date_range[1]
+        self.df = self.df.loc[start_range : end_range]
 
 # === VISUALIZATION USING STREAMLIT ===
 # PAGE CONFIGURATION
@@ -116,3 +131,4 @@ container1 = Container(df_combined, provinces)
 container1.options()
 container1.add_metrics()
 container1.add_line_chart()
+container1.date_slider()
