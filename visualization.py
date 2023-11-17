@@ -138,5 +138,5 @@ container1.add_line_chart()
 date_slider = st.slider(
     "When do you start?",
     value=(datetime(2020, 1, 1), datetime(2022, 1, 1)),
-    format="%Y-%m-%d"
+    step=30
 )
