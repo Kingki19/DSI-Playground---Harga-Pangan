@@ -131,7 +131,6 @@ with st.sidebar:
 # Container 1
 container1 = Container(df_combined, provinces)
 container1.options()
-container1.date_slider()
 container1.add_metrics()
 container1.add_line_chart()
-
+container1.date_slider()
