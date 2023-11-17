@@ -76,9 +76,9 @@ class Container:
             max = round(self.province_data.stack().max())
             with self.container:
                 min_col, mean_col, max_col = st.columns(3)
-                min_col.metric("Minimum price", f"Rp {min:.}")
-                mean_col.metric("Mean price", f"Rp {mean:.}")
-                max_col.metric("Maximum price", f"Rp {max:.}")
+                min_col.metric("Minimum price", f"Rp {min:,}")
+                mean_col.metric("Mean price", f"Rp {mean:,}")
+                max_col.metric("Maximum price", f"Rp {max:,}")
         else:
             st.error("It can't be possible!")
         
