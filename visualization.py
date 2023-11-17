@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import requests
+from datetime import datetime
 
 # === Preparing data for visualization ===
 # Function to get csv dataframe from url
@@ -110,34 +111,7 @@ with st.sidebar:
 
 
 # DASHBOARD
-# column_name = province_selectbox
-# st.header(column_name)
-# st.divider()
-
-# if data_radio == "Bawang merah / Shallots":
-#     # bm_dashboard = Dashboard(bm_gabungan, column_name)
-#     # st.line_chart(bm_dashboard.col_data)
-#     container_1 = Container(bm_gabungan, column_name)
-#     container_1.add_metrics()
-#     container_1 = container_1.add_line_chart()
-    
-# elif data_radio == "Daging ayam ras / Purebred chicken meat":
-#     # dar_dashboard = Dashboard(dar_gabungan, column_name)
-#     # st.line_chart(dar_dashboard.col_data)
-#     container_1 = Container(dar_gabungan, column_name)
-#     container_1 = container_1.add_metrics()
-#     container_1 = container_1.add_line_chart()
-
-# elif data_radio == "Beras premium / Premium rice":
-#     if column_name == 'Gorontalo':
-#         st.error("There's no Gorontalo in this dataframe")
-#     else:
-#         # bp_dashboard = Dashboard(bp_gabungan, column_name)
-#         # st.line_chart(bp_dashboard.col_data)
-#         container_1 = Container(bp_gabungan, column_name)
-#         container_1.add_metrics()
-#         container_1 = container_1.add_line_chart()
-
+# Container 1
 container1 = Container(df_combined, provinces)
 container1.options()
 container1.add_metrics()
