@@ -93,10 +93,12 @@ class Container:
             st.info("You didn't choose a single province!")
         elif len(self.selected_province) > 0:
             min = round(self.province_data.stack().min())
-            min_index, min_column = find_position_in_df(self.province_data, min)[0]
+            min_position = find_position_in_df(self.province_data, self.province_data.stack().min()) # don't use round()
+            min_index, min_column = min_position[0]
             mean = round(self.province_data.stack().mean())
             max = round(self.province_data.stack().max())
-            max_index, max_column = find_position_in_df(self.province_data, max)[0]
+            max_position = find_position_in_df(self.province_data, self.province_data.stack().max()) # don't use round()
+            max_index, max_column = max_position[0]
             with self.container:
                 min_col, mean_col, max_col = st.columns(3)
                 min_col.metric(
