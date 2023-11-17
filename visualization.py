@@ -43,7 +43,7 @@ class Container:
         self.df = None # self.df = self.df_combined[selected_df]
         self.selected_province = None # province that want to display 
         self.province_data = {} # province_data = {'province_name1': province_data1, ...}
-        self.container = st.container
+        self.container = st.container()
         
     # Add options for user to choose one or multiple provinces and which data to visualize
     def options(self):
@@ -134,7 +134,7 @@ with st.sidebar:
 #         container_1 = Container(bp_gabungan, column_name)
 #         container_1.add_metrics()
 #         container_1 = container_1.add_line_chart()
- 
+
 container1 = Container(df_combined, provinces)
 container1.options()
 container1.add_metrics()
