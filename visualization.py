@@ -47,17 +47,17 @@ class Container:
         
     # Add options for user to choose one or multiple provinces and which data to visualize
     def options(self):
-        # with self.container:
-        data_option, provinces_option = st.columns(2)
-        data_option = st.selectbox(
-            "Select the data you want to visualize:",
-            ('bawang_merah', 'daging_ayam_ras', 'beras_premium')
-        )
-        provinces_option = st.multiselect(
-            "Select which provinces you want to display:",
-            self.provinces,
-            ['Aceh']
-        )
+        with self.container:
+            data_option, provinces_option = st.columns(2)
+            data_option = st.selectbox(
+                "Select the data you want to visualize:",
+                ('bawang_merah', 'daging_ayam_ras', 'beras_premium')
+            )
+            provinces_option = st.multiselect(
+                "Select which provinces you want to display:",
+                self.provinces,
+                ['Aceh']
+            )
         if (data_option == 'beras_premium') and ('Gorontalo' in provinces_option):
             st.warning('There\'s no \'Gorontalo\' Column in \'beras_premium\' data')            
         else:
