@@ -33,7 +33,13 @@ provinces = [
     'Maluku Utara', 'Papua Barat', 'Papua'
 ]
 
-# === Create objects to visualize ===
+# === Create functions or objects to visualize ===
+# Function to find location (index, column) in dataframe based target value
+def find_position_in_df(df, target_value):
+    result = df.where(df == target_value).stack()
+    locations = list(zip(result.index.get_level_values(0), result.index.get_level_values(1)))
+    return locations
+    
 # Create a 'Container' that contain one or multiple element
 # 'container' is local variable in 'Container' object to make sure all element in one 'container'
 class Container:
@@ -87,17 +93,31 @@ class Container:
             st.info("You didn't choose a single province!")
         elif len(self.selected_province) > 0:
             min = round(self.province_data.stack().min())
+            min_index, min_column = find_position_in_df(self.province_data, min)[0]
             mean = round(self.province_data.stack().mean())
             max = round(self.province_data.stack().max())
+            max_index, max_column = find_position_in_df(self.province_data, max)[0]
             with self.container:
                 min_col, mean_col, max_col = st.columns(3)
                 min_col.metric(
-                    label="Minimum price", 
-                    value=f"Rp {min:,}",
-                    help=f"test"
+                    label = "Minimum price", 
+                    value = f"Rp {min:,}",
+                    delta = f"{min_column} : {min_index}",
+                    delta_color = 'off',
+                    help = f"The lowest value in seleced data / provinces"
                 )
-                mean_col.metric("Mean price", f"Rp {mean:,}")
-                max_col.metric("Maximum price", f"Rp {max:,}")
+                mean_col.metric(
+                    label = "Mean price", 
+                    value = f"Rp {mean:,}",
+                    help = f"Mean value of seleced data / provinces"
+                )
+                max_col.metric(
+                    label = "Maximum price", 
+                    value = f"Rp {max:,}",
+                    delta = f"{max_column} : {max_index}"
+                    delta_color = "off",
+                    help = f"The highest value in seleced data / provinces"
+                )
         else:
             st.error("It can't be possible!")
         
