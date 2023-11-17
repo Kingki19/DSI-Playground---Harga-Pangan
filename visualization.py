@@ -49,10 +49,12 @@ class Container:
     # Add options for user to choose one or multiple provinces and which data to visualize
     def options(self):
         with self.container:
+            # Options for categorical data
             data_option = st.selectbox(
                 "Select the data you want to visualize:",
                 ('bawang_merah', 'daging_ayam_ras', 'beras_premium')
             )
+            # Multi-Options for provinces 
             provinces_option = st.multiselect(
                 "Select which provinces you want to display:",
                 self.provinces,
@@ -67,7 +69,8 @@ class Container:
             self.df.index = pd.to_datetime(self.df.index) # just to make sure the index was a datetime
             self.selected_province = provinces_option # return list type
             self.province_data = pd.DataFrame({province : self.df[province] for province in self.selected_province})
-            index_list = self.df.index.to_list()    
+            index_list = self.df.index.to_list()
+        # Slider options for datetime range
             with self.container:
                 date_range = st.select_slider(
                     "Choose date range to visualize:",
@@ -99,20 +102,6 @@ class Container:
     def add_line_chart(self):
         with self.container:
             st.line_chart(self.province_data)
-    
-    # Create range slider for visualization
-    def date_slider(self):
-        index_list = self.df.index.to_list()    
-        with self.container:
-            date_range = st.select_slider(
-                "Choose date range to visualize:",
-                options = index_list,
-                value = (index_list[0], index_list[-1])
-            )
-    
-        start_range = date_range[0]
-        end_range = date_range[1]
-        self.df = self.df.loc[start_range:end_range]
 
 # === VISUALIZATION USING STREAMLIT ===
 # PAGE CONFIGURATION
@@ -139,7 +128,6 @@ with st.sidebar:
 # Container 1
 container1 = Container(df_combined, provinces)
 container1.options()
-container1.date_slider()
 container1.add_metrics()
 container1.add_line_chart()
 
