@@ -58,11 +58,14 @@ class Container:
                 self.provinces,
                 ['Aceh']
             )
-        self.selected_df = data_option # return string type
-        self.df = self.df_combined[self.selected_df]
-        self.selected_province = provinces_option # return list type
-        self.province_data = pd.DataFrame({province : self.df[province] for province in self.selected_province})
-        
+        if (data_option == 'beras_premium') and ('Gorontalo' in provinces_option):
+            st.warning('There\'s no \'Gorontalo\' Column in \'beras_premium\' data')            
+        else:
+            self.selected_df = data_option # return string type
+            self.df = self.df_combined[self.selected_df]
+            self.selected_province = provinces_option # return list type
+            self.province_data = pd.DataFrame({province : self.df[province] for province in self.selected_province})
+            
     # Create metrics that include
     def add_metrics(self):
         if len(self.selected_province) == 0:
