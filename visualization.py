@@ -67,8 +67,6 @@ class Container:
             self.selected_df = data_option # return string type
             self.df = self.df_combined[self.selected_df]
             self.df.index = pd.to_datetime(self.df.index) # just to make sure the index was a datetime
-            self.selected_province = provinces_option # return list type
-            self.province_data = pd.DataFrame({province : self.df[province] for province in self.selected_province})
             index_list = self.df.index.to_list()
         # Slider options for datetime range
             with self.container:
@@ -80,6 +78,8 @@ class Container:
             start_range = date_range[0]
             end_range = date_range[1]
             self.df = self.df.loc[start_range:end_range]
+            self.selected_province = provinces_option # return list type
+            self.province_data = pd.DataFrame({province : self.df[province] for province in self.selected_province})
             
             
     # Create metrics that include
