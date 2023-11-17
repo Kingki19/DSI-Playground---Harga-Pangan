@@ -61,7 +61,7 @@ class Container:
         self.selected_df = data_option # return string type
         self.df = self.df_combined[self.selected_df]
         self.selected_province = provinces_option # return list type
-        self.province_data = {province : self.df[province] for province in self.selected_province} 
+        self.province_data = pd.DataFrame({province : self.df[province] for province in self.selected_province})
         
     # Create metrics that include
     def add_metrics(self):
