@@ -91,19 +91,20 @@ class Container:
     
     # Create range slider for visualization
     def date_slider(self):
-        index_start = self.df.index.min() # first index of datetime
-        index_end = self.df.index.max() # last index of datetime
+        index_start = self.df.index.min().strftime('%Y-%m-%d')  # Convert to string
+        index_end = self.df.index.max().strftime('%Y-%m-%d')    # Convert to string
         with self.container:
             date_range = st.slider(
                 "Choose date range to visualize:",
-                value = (index_start, index_end),
-                min_value = index_start,
-                max_value = index_end, 
-                step = 30 # each month
+                value=(index_start, index_end),
+                min_value=index_start,
+                max_value=index_end,
+                step=30  # each month
             )
-        start_range = date_range[0]
-        end_range = date_range[1]
-        self.df = self.df.loc[start_range : end_range]
+        start_range = pd.to_datetime(date_range[0])
+        end_range = pd.to_datetime(date_range[1])
+        self.df = self.df.loc[start_range:end_range]
+
 
 # === VISUALIZATION USING STREAMLIT ===
 # PAGE CONFIGURATION
