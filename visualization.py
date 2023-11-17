@@ -97,10 +97,10 @@ class Container:
         with self.container:
             date_range = st.slider(
                 "Choose date range to visualize:",
-                value=(index_start, index_end),
-                #min_value=index_start,
-                #max_value=index_end,
-                step=30  # each month
+                index_start,
+                index_end,
+                (index_start, index_end)
+                #step=30  # each month
             )
     
         start_range = pd.to_datetime(date_range[0], format='%Y-%m-%d')
