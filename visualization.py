@@ -91,20 +91,16 @@ class Container:
     
     # Create range slider for visualization
     def date_slider(self):
-        index_start = self.df.index.min().strftime('%Y-%m-%d')  # Convert to string
-        index_end = self.df.index.max().strftime('%Y-%m-%d')    # Convert to string
-    
+        index_list = self.df.index.to_list()    
         with self.container:
-            date_range = st.slider(
+            date_range = st.select_slider(
                 "Choose date range to visualize:",
-                index_start,
-                index_end,
-                (index_start, index_end)
-                #step=30  # each month
+                options = index_list,
+                value = (index_list[0], index_list[-1])
             )
     
-        start_range = pd.to_datetime(date_range[0], format='%Y-%m-%d')
-        end_range = pd.to_datetime(date_range[1], format='%Y-%m-%d')
+        start_range = date_range[0]
+        end_range = date_range[1]
         self.df = self.df.loc[start_range:end_range]
 
 # === VISUALIZATION USING STREAMLIT ===
@@ -134,9 +130,4 @@ container1 = Container(df_combined, provinces)
 container1.options()
 container1.add_metrics()
 container1.add_line_chart()
-# container1.date_slider()
-date_slider = st.slider(
-    "When do you start?",
-    value=(datetime(2020, 1, 1), datetime(2022, 1, 1)),
-    step=30
-)
+container1.date_slider()
