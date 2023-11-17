@@ -93,7 +93,7 @@ class Container:
         index_start = self.df.index.min() # first index of datetime
         index_end = self.df.index.max() # last index of datetime
         with self.container:
-            date_range = st.slider( # return tuple value of range that used 
+            date_range = st.slider(
                 "Choose date range to visualize:",
                 min_value = index_start,
                 max_value = index_end, 
