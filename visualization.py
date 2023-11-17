@@ -49,7 +49,6 @@ class Container:
     # Add options for user to choose one or multiple provinces and which data to visualize
     def options(self):
         with self.container:
-            data_option, provinces_option = st.columns(2)
             data_option = st.selectbox(
                 "Select the data you want to visualize:",
                 ('bawang_merah', 'daging_ayam_ras', 'beras_premium')
@@ -60,13 +59,25 @@ class Container:
                 ['Aceh']
             )
         if (data_option == 'beras_premium') and ('Gorontalo' in provinces_option):
-            st.warning('There\'s no \'Gorontalo\' Column in \'beras_premium\' data')            
+            st.warning('There\'s no \'Gorontalo\' Column in \'beras_premium\' data')
+            st.stop()
         else:
             self.selected_df = data_option # return string type
             self.df = self.df_combined[self.selected_df]
             self.df.index = pd.to_datetime(self.df.index) # just to make sure the index was a datetime
             self.selected_province = provinces_option # return list type
             self.province_data = pd.DataFrame({province : self.df[province] for province in self.selected_province})
+            index_list = self.df.index.to_list()    
+            with self.container:
+                date_range = st.select_slider(
+                    "Choose date range to visualize:",
+                    options = index_list,
+                    value = (index_list[0], index_list[-1])
+                )
+            start_range = date_range[0]
+            end_range = date_range[1]
+            self.df = self.df.loc[start_range:end_range]
+            
             
     # Create metrics that include
     def add_metrics(self):
